@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:learning_project/route/route.dart';
 
 void main() {
@@ -13,6 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: ThemeData(
+        useMaterial3: true
+      ),
       debugShowCheckedModeBanner: false,
       getPages: CustomRoute().route,
       home: HomePage(),
@@ -66,6 +71,11 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10),
                   child: buildContainer(
                       "/counter", "Counter App", Colors.purple),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: buildContainer(
+                      "/todoscreen", "To Do List App", Colors.grey),
                 ),
               ],
             ),
