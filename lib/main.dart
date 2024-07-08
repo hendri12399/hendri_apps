@@ -1,10 +1,18 @@
-
+import 'package:learning_project/model/list_task.dart';
+import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:hive/hive.dart';
 import 'package:learning_project/route/route.dart';
 
-void main() {
+// cara make hive
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var appDocumentDirectory =
+      await pathProvider.getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDirectory.path);
+  Hive.registerAdapter(TaskAdapter());
+  await Hive.openBox<Task>("task");
   runApp(const MyApp());
 }
 
@@ -15,9 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(
-        useMaterial3: true
-      ),
+      theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
       getPages: CustomRoute().route,
       home: HomePage(),
@@ -37,9 +43,8 @@ class HomePage extends StatelessWidget {
       body: Stack(children: [
         Container(
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage("img/main.png"),
-            fit: BoxFit.cover)
-          ),
+              image: DecorationImage(
+                  image: AssetImage("img/main.png"), fit: BoxFit.cover)),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -64,13 +69,12 @@ class HomePage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: buildContainer(
-                      "/khodam", "Cek Khodam", Colors.red),
+                  child: buildContainer("/khodam", "Cek Khodam", Colors.red),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: buildContainer(
-                      "/counter", "Counter App", Colors.purple),
+                  child:
+                      buildContainer("/counter", "Counter App", Colors.purple),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
@@ -97,3 +101,7 @@ class HomePage extends StatelessWidget {
             child: Text(text2)),
       );
 }
+
+///tugas
+///bikin aplikasi yang didalemnya ada login google, ada fitur maps, pake database firabase
+/// (apps list restaurant di maps)

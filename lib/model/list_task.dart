@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-part 'task.g.dart';
+part 'list_task.g.dart';
 
 @HiveType(typeId: 0)
 class Task {
